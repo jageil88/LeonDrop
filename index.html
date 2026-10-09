@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101116">
+  <title>LeonDrop — Deine Geräte-Zwischenablage</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="LeonDrop Startseite">
+        <span class="brand-mark">L<span>↗</span></span>
+        <span><strong>LeonDrop</strong><small>Dein persönlicher Drop-Bereich</small></span>
+      </a>
+      <div class="top-actions">
+        <span class="status"><i></i><span id="connectionStatus">Lokal bereit</span></span>
+        <button class="icon-button" id="themeToggle" title="Darstellung wechseln" aria-label="Darstellung wechseln">☼</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">DEINE GERÄTE. EIN ORT.</p>
+          <h1>Rüber damit<span>.</span></h1>
+          <p class="hero-sub">Links, Texte, Bilder und Dateien schnell zwischen Handy und Laptop bewegen — ohne dir selbst Nachrichten zu schicken.</p>
+          <div class="device-note"><span class="pulse"></span><span>Dieser Browser ist bereit</span><span class="dot-sep">·</span><span id="deviceLabel">Dein Gerät</span></div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="device phone"><div class="device-camera"></div><div class="screen-lines"><b></b><b></b><b></b><span>↗</span></div></div>
+          <div class="transfer-arrow">↔</div>
+          <div class="device laptop"><div class="laptop-screen"><div></div><div></div><div></div></div><div class="laptop-base"></div></div>
+          <div class="floating-chip chip-link">↗ &nbsp; Link</div><div class="floating-chip chip-file">▧ &nbsp; Datei</div>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <div class="section-heading">
+          <div><p class="eyebrow">SCHNELL SENDEN</p><h2>Was möchtest du rüberschicken?</h2></div>
+          <span class="local-badge">Demo-Modus</span>
+        </div>
+
+        <div class="composer card">
+          <div class="type-tabs" role="tablist" aria-label="Inhaltstyp">
+            <button class="type-tab active" data-type="text" role="tab" aria-selected="true"><span>✎</span> Text</button>
+            <button class="type-tab" data-type="link" role="tab" aria-selected="false"><span>↗</span> Link</button>
+            <button class="type-tab" data-type="file" role="tab" aria-selected="false"><span>▧</span> Datei / Bild</button>
+          </div>
+          <form id="sendForm">
+            <label for="contentInput" id="inputLabel">Dein Text</label>
+            <textarea id="contentInput" placeholder="Text hier einfügen oder tippen…" rows="4" maxlength="20000"></textarea>
+            <div class="file-picker hidden" id="filePicker">
+              <input id="fileInput" type="file" accept="image/*,.pdf,.txt,.zip,.doc,.docx,.xlsx,.pptx" multiple>
+              <label for="fileInput" class="drop-zone"><span class="upload-icon">↑</span><strong>Dateien auswählen</strong><small>Bilder, Dokumente und andere Dateien</small></label>
+              <div id="selectedFiles" class="selected-files"></div>
+            </div>
+            <div class="composer-footer">
+              <span id="inputHint">Tipp: Strg + Enter zum schnellen Senden</span>
+              <button class="primary-button" type="submit"><span>↗</span> Senden</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="content-toolbar">
+          <div><h2>Deine Drops</h2><p>Gesendete Inhalte auf diesem Gerät</p></div>
+          <div class="toolbar-actions"><button class="secondary-button" id="copyLatest">Kopiere letzten Text</button><button class="text-button" id="clearAll">Verlauf löschen</button></div>
+        </div>
+        <div id="dropList" class="drop-list"></div>
+        <div id="emptyState" class="empty-state card">
+          <div class="empty-icon">↗</div><h3>Noch nichts hier</h3><p>Sende deinen ersten Text, Link oder eine Datei. Deine Drops erscheinen dann hier.</p>
+        </div>
+        <div class="notice"><span>ⓘ</span><p><strong>Wichtig:</strong> Diese Startversion speichert Drops nur in diesem Browser. Damit Handy und Laptop wirklich synchron sind, muss die Website mit einem gemeinsamen Backend verbunden und online veröffentlicht werden. Automatisches Lesen der Zwischenablage ist aus Sicherheitsgründen nicht dauerhaft möglich; du kannst Inhalte aber per Klick kopieren.</p></div>
+      </section>
+    </main>
+    <footer><span>LeonDrop <span class="footer-dot">●</span> Persönliche Übergabe zwischen Geräten</span><span>Einfach. Schnell. Bei dir.</span></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
